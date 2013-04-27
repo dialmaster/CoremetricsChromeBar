@@ -40,7 +40,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
       
       // Send a message about this tag...
-      // Fails currently -- it needs to be able to know what the id of the popup window we made is.
+      // This kind of evolved from a few to MANY attributes and now it's horrible.
+      // Should probably just change to send all of queryString.
       if (ourTabId) {
         console.log("Sending a message to the tab " + ourTabId);
           chrome.tabs.sendMessage(ourTabId, {
