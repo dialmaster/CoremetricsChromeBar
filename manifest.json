@@ -1,0 +1,22 @@
+{
+  "name": "Coremetrics Bar for Chrome",
+  "version": "1.4",
+  "manifest_version": 2,
+  "description": "This extension shows you all Coremetrics requests, allowing easier debugging of Coremetrics.",
+  "icons": { "16": "icon16.png",
+             "32": "icon32.png",
+             "48": "icon48.png",
+                       "128": "icon.png" },
+  "permissions": [
+      "tabs", 
+      "<all_urls>",
+      "webRequest",
+      "webRequestBlocking",
+      "notifications",
+      "http://*/",
+      "https://*/"
+  ],
+  "background": {
+    "scripts": ["gettags.js"]
+  }
+}
