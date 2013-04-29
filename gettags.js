@@ -17,17 +17,20 @@ var ourTabId;
 // We need to receive the tabID for the new window that this extension creates to display the tag data.
 chrome.extension.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log('Hey, the background script got a message!' +request.greeting);
-        ourTabId = request.greeting;
+        // If the message contains a cmTagWindowID, it the one we were waiting for. This is our output window.
+        if (request.cmTagTabID) {
+            console.log('Display window registered with background script. Tab ID is ' +request.cmTagTabID);
+            ourTabId = request.cmTagTabID;
+        }
     } 
 );
 
-// Listen for HTTP requests. Filter on eluminate and then send the data to our window
+// Listen for HTTP requests. Assume a request with 'ci=' and 'tid=' is a coremetrics request
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details) {
     console.log('Request: ' + details.url);
     var siteUrl = details.url.split('/')[2];
-    if (details.url.indexOf("ci=") != -1) {
+    if (details.url.indexOf("ci=") != -1 && details.url.indexOf("tid=") != -1) {
      var queryString = {};
      
      var theseParams = details.url.split("?")[1];

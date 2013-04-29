@@ -45,9 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// Get current tabid and send it as a message to the background as a 'greeting'
+// Get current tabid and send it as a message to the background script. The background
+// script NEEDs this in order to send messages to this script
 chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-  chrome.extension.sendMessage({greeting: tabs[0].id}, function(response) {
+  chrome.extension.sendMessage({cmTagTabID: tabs[0].id}, function(response) {
     console.log(response);
   });
 } );
