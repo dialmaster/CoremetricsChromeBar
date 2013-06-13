@@ -95,6 +95,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
       (request.at4 ? '<tr><td width="100px">Attribute 4 (Explore)</td><td>' + request.at4 + '</td></tr>' : '') +
       (request.at5 ? '<tr><td width="100px">Attribute 5 (Explore)</td><td>' + request.at5 + '</td></tr>' : '') +
       (request.at6 ? '<tr><td width="100px">Attribute 6 (Explore)</td><td>' + request.at6 + '</td></tr>' : '') +
+      (request.o_a1 ? '<tr><td width="100px">Attribute 1 (Explore)</td><td>' + request.o_a1 + '</td></tr>' : '') +
       (request.s1 ? '<tr><td width="100px">Attribute 1 (Explore)</td><td>' + request.s1 + '</td></tr>' : '') +
       (request.s2 ? '<tr><td width="100px">Attribute 2 (Explore)</td><td>' + request.s2 + '</td></tr>' : '') +
       (request.s3 ? '<tr><td width="100px">Attribute 3 (Explore)</td><td>' + request.s3 + '</td></tr>' : '') +
@@ -114,6 +115,9 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
       (request.lineNumber ? '<tr><td width="100px">Line Number</td><td>' + request.lineNumber + '</td></tr>' : '') +
       (request.referralUrl ? '<tr><td width="100px">Referral Url</td><td>' + request.referralUrl + '</td></tr>' : '') +
       (request.cd ? '<tr><td width="100px">Customer ID</td><td>' + request.cd + '</td></tr>' : '') +
+      (request.em ? '<tr><td width="100px">Email</td><td>' + request.em + '</td></tr>' : '') +
+      (request.nl ? '<tr><td width="100px">Newsletter Name</td><td>' + request.nl + '</td></tr>' : '') +
+      (request.sd ? '<tr><td width="100px">Subscribed Flag</td><td>' + request.sd + '</td></tr>' : '') +
       (request.destinationUrl ? '<tr><td width="100px">Destination Url</td><td>' + request.destinationUrl + '</td></tr>' : '') +
 
       '</tbody></table></div>'

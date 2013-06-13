@@ -59,6 +59,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
             "libraryVersion": queryString['vn1'] || '',
             "productId": queryString['pr'] || '',
             "productName": queryString['pm'] || '',
+            "o_a1": queryString['o_a1'] || '', 
             "at1": queryString['pr_a1'] || '', 
             "at2": queryString['pr_a2'] || '', 
             "at3": queryString['pr_a3'] || '', 
@@ -89,7 +90,10 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
             "lineNumber": queryString['li'] || '', 
             "eid": queryString['eid'] || '', 
             "ecat": queryString['ecat'] || '', 
-            "cd": queryString['cd'] || ''
+            "cd": queryString['cd'] || '',
+            "em": queryString['em'] || '',
+            "nl": queryString['nl'] || '',
+            "sd": queryString['sd'] || ''
 
           }, function(res){console.log(res);});  
       }
