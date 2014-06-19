@@ -1,15 +1,17 @@
 console.log('----------Coremetrics Tagbar for Chrome-----------');
 
 // Create the window to do the tagging in
-chrome.windows.create({
-    type: 'popup',
-    url: "tagwindow.html",
-    top: 100,
-    left: 100,
-    width: 800,
-    height: 760
-}, function (newWindow) {
-    console.log(newWindow);
+chrome.browserAction.onClicked.addListener(function(tab) {
+	chrome.windows.create({
+		type: 'popup',
+		url: "tagwindow.html",
+		top: 100,
+		left: 100,
+		width: 800,
+		height: 760
+	}, function (newWindow) {
+		console.log(newWindow);
+	});
 });
 
 var ourTabId;
