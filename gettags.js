@@ -47,7 +47,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       // Should probably just change to send all of queryString.
       if (ourTabId) {
         console.log("Sending a message to the tab " + ourTabId);
-          chrome.tabs.sendMessage(ourTabId, {
+
+		var tabParams = {
             "siteUrl": siteUrl,
             "tagType": queryString['tid'] || '',  
             "clientId": queryString['ci'] || '',          
@@ -59,19 +60,6 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
             "libraryVersion": queryString['vn1'] || '',
             "productId": queryString['pr'] || '',
             "productName": queryString['pm'] || '',
-            "o_a1": queryString['o_a1'] || '', 
-            "at1": queryString['pr_a1'] || '', 
-            "at2": queryString['pr_a2'] || '', 
-            "at3": queryString['pr_a3'] || '', 
-            "at4": queryString['pr_a4'] || '', 
-            "at5": queryString['pr_a5'] || '', 
-            "at6": queryString['pr_a6'] || '',
-            "s1": queryString['s_a1'] || '', 
-            "s2": queryString['s_a2'] || '', 
-            "s3": queryString['s_a3'] || '', 
-            "s4": queryString['s_a4'] || '', 
-            "s5": queryString['s_a5'] || '', 
-            "s6": queryString['s_a6'] || '',
             "targetUrl": queryString['hr'] || '',
             "quantity": queryString['qt'] || '',
             "basePrice": queryString['bp'] || '',
@@ -95,7 +83,19 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
             "nl": queryString['nl'] || '',
             "sd": queryString['sd'] || ''
 
-          }, function(res){console.log(res);});  
+          };
+
+		// explore attributes for the different coremetrics tags
+		// get all query parameters matching ..._a99 pattern - pv_a99, pr_a99, s_a99, o_a99, etc.
+		var exploreAttributesPattern = /_a([\d]+)$/;
+		var exploreAttributes = Object.keys(queryString).filter( function(element) {return exploreAttributesPattern.test(element)} );
+		for (index=0; index<exploreAttributes.length; index++) { 
+			attributeName = exploreAttributes[index];
+			attributeNameIndex = exploreAttributesPattern.exec(attributeName)[1];
+			tabParams[attributeName]=queryString[attributeName] || '';
+		}
+
+        chrome.tabs.sendMessage(ourTabId, tabParams, function(res){console.log(res);});  
       }
     
     }
