@@ -70,7 +70,7 @@ var tid_hash = { 1: "Page View Tag",
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     var whichSite = request.destinationUrl.split('/')[2];
-	var exploreAttributesPattern = /_a([\d]+)$/;
+	var exploreAttributesPattern = /(_a|rg)([\d]+)$/;
 	var exploreAttributes = Object.keys(request).filter( function(element) {return exploreAttributesPattern.test(element)} );
 
    $('.dialfooter').prepend(
@@ -96,8 +96,8 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 		result = '';
 		for (index=0; index<exploreAttributes.length; index++) { 
 			attributeName = exploreAttributes[index];
-			attributeNameIndex = exploreAttributesPattern.exec(attributeName)[1];
-			result = result + (request[attributeName] ? '<tr><td width="100px">Attribute '+attributeNameIndex+' (Explore)</td><td>' + request[attributeName] + '</td></tr>' : '');
+			attributeNameIndex = exploreAttributesPattern.exec(attributeName)[2];
+			result = result + (request[attributeName] ? '<tr><td width="100px">Attribute '+attributeNameIndex+' (Explore) ('+attributeName+')</td><td>' + request[attributeName] + '</td></tr>' : '');
 		}
 		return result;
       })() +

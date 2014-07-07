@@ -89,11 +89,11 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 		// explore attributes for the different coremetrics tags
 		// get all query parameters matching ..._a99 pattern - pv_a99, pr_a99, s_a99, o_a99, etc.
-		var exploreAttributesPattern = /_a([\d]+)$/;
+		var exploreAttributesPattern = /(_a|rg)([\d]+)$/;
 		var exploreAttributes = Object.keys(queryString).filter( function(element) {return exploreAttributesPattern.test(element)} );
 		for (index=0; index<exploreAttributes.length; index++) { 
 			attributeName = exploreAttributes[index];
-			attributeNameIndex = exploreAttributesPattern.exec(attributeName)[1];
+			attributeNameIndex = exploreAttributesPattern.exec(attributeName)[2];
 			tabParams[attributeName]=queryString[attributeName] || '';
 		}
 
