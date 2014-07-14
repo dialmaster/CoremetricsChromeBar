@@ -82,6 +82,10 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
             "ecat": queryString['ecat'] || '', 
             "cd": queryString['cd'] || '',
             "em": queryString['em'] || '',
+			"ct": queryString['ct'] || '',
+			"sa": queryString['sa'] || '',
+			"zp": queryString['zp'] || '',
+			"cy": queryString['cy'] || '',
             "nl": queryString['nl'] || '',
             "sd": queryString['sd'] || ''
 

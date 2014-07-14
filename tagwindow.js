@@ -115,6 +115,10 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
       (request.referralUrl ? '<tr><td width="100px">Referral Url</td><td>' + request.referralUrl + '</td></tr>' : '') +
       (request.cd ? '<tr><td width="100px">Customer ID</td><td>' + request.cd + '</td></tr>' : '') +
       (request.em ? '<tr><td width="100px">Email</td><td>' + request.em + '</td></tr>' : '') +
+      (request.ct ? '<tr><td width="100px">City</td><td>' + request.ct + '</td></tr>' : '') +
+      (request.sa ? '<tr><td width="100px">State</td><td>' + request.sa + '</td></tr>' : '') +
+      (request.zp ? '<tr><td width="100px">Zip/Post Code</td><td>' + request.zp + '</td></tr>' : '') +
+      (request.cy ? '<tr><td width="100px">Country</td><td>' + request.cy + '</td></tr>' : '') +
       (request.nl ? '<tr><td width="100px">Newsletter Name</td><td>' + request.nl + '</td></tr>' : '') +
       (request.sd ? '<tr><td width="100px">Subscribed Flag</td><td>' + request.sd + '</td></tr>' : '') +
       (request.destinationUrl ? '<tr><td width="100px">Destination Url</td><td>' + request.destinationUrl + '</td></tr>' : '') +
