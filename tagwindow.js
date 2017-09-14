@@ -70,6 +70,9 @@ var tid_hash = { 1: "Page View Tag",
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
     var whichSite = request.destinationUrl.split('/')[2];
+	var exploreAttributesPattern = /(_a|rg)([\d]+)$/;
+	var exploreAttributes = Object.keys(request).filter( function(element) {return exploreAttributesPattern.test(element)} );
+
    $('.dialfooter').prepend(
       '<div class="datagrid" site="' + whichSite + '" tagtype="' + request.tagType + '"><table>' + 
       '<thead><tr><th colspan="2">' + tid_hash[request.tagType] + ' (tid "'+ request.tagType + '")' + ' (' + request.siteUrl + ')</th></tr></thead>' +
@@ -89,19 +92,15 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
       (request.basePrice ? '<tr><td width="100px">Base Price</td><td>' + request.basePrice + '</td></tr>' : '') +
       (request.slotNumber ? '<tr><td width="100px">Slot Number</td><td>' + request.slotNumber + '</td></tr>' : '') +
       (request.actionType ? '<tr><td width="100px">Action Type</td><td>' + request.actionType + '</td></tr>' : '') +
-      (request.at1 ? '<tr><td width="100px">Attribute 1 (Explore)</td><td>' + request.at1 + '</td></tr>' : '') +
-      (request.at2 ? '<tr><td width="100px">Attribute 2 (Explore)</td><td>' + request.at2 + '</td></tr>' : '') +
-      (request.at3 ? '<tr><td width="100px">Attribute 3 (Explore)</td><td>' + request.at3 + '</td></tr>' : '') +
-      (request.at4 ? '<tr><td width="100px">Attribute 4 (Explore)</td><td>' + request.at4 + '</td></tr>' : '') +
-      (request.at5 ? '<tr><td width="100px">Attribute 5 (Explore)</td><td>' + request.at5 + '</td></tr>' : '') +
-      (request.at6 ? '<tr><td width="100px">Attribute 6 (Explore)</td><td>' + request.at6 + '</td></tr>' : '') +
-      (request.o_a1 ? '<tr><td width="100px">Attribute 1 (Explore)</td><td>' + request.o_a1 + '</td></tr>' : '') +
-      (request.s1 ? '<tr><td width="100px">Attribute 1 (Explore)</td><td>' + request.s1 + '</td></tr>' : '') +
-      (request.s2 ? '<tr><td width="100px">Attribute 2 (Explore)</td><td>' + request.s2 + '</td></tr>' : '') +
-      (request.s3 ? '<tr><td width="100px">Attribute 3 (Explore)</td><td>' + request.s3 + '</td></tr>' : '') +
-      (request.s4 ? '<tr><td width="100px">Attribute 4 (Explore)</td><td>' + request.s4 + '</td></tr>' : '') +
-      (request.s5 ? '<tr><td width="100px">Attribute 5 (Explore)</td><td>' + request.s5 + '</td></tr>' : '') +
-      (request.s6 ? '<tr><td width="100px">Attribute 6 (Explore)</td><td>' + request.s6 + '</td></tr>' : '') +
+	  (function() {
+		result = '';
+		for (index=0; index<exploreAttributes.length; index++) { 
+			attributeName = exploreAttributes[index];
+			attributeNameIndex = exploreAttributesPattern.exec(attributeName)[2];
+			result = result + (request[attributeName] ? '<tr><td width="100px">Attribute '+attributeNameIndex+' (Explore) ('+attributeName+')</td><td>' + request[attributeName] + '</td></tr>' : '');
+		}
+		return result;
+      })() +
       (request.ps1 ? '<tr><td width="100px">Extra Field 1</td><td>' + request.ps1 + '</td></tr>' : '') +
       (request.ps2 ? '<tr><td width="100px">Extra Field 2</td><td>' + request.ps2 + '</td></tr>' : '') +
       (request.ps3 ? '<tr><td width="100px">Extra Field 3</td><td>' + request.ps3 + '</td></tr>' : '') +
@@ -116,6 +115,10 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
       (request.referralUrl ? '<tr><td width="100px">Referral Url</td><td>' + request.referralUrl + '</td></tr>' : '') +
       (request.cd ? '<tr><td width="100px">Customer ID</td><td>' + request.cd + '</td></tr>' : '') +
       (request.em ? '<tr><td width="100px">Email</td><td>' + request.em + '</td></tr>' : '') +
+      (request.ct ? '<tr><td width="100px">City</td><td>' + request.ct + '</td></tr>' : '') +
+      (request.sa ? '<tr><td width="100px">State</td><td>' + request.sa + '</td></tr>' : '') +
+      (request.zp ? '<tr><td width="100px">Zip/Post Code</td><td>' + request.zp + '</td></tr>' : '') +
+      (request.cy ? '<tr><td width="100px">Country</td><td>' + request.cy + '</td></tr>' : '') +
       (request.nl ? '<tr><td width="100px">Newsletter Name</td><td>' + request.nl + '</td></tr>' : '') +
       (request.sd ? '<tr><td width="100px">Subscribed Flag</td><td>' + request.sd + '</td></tr>' : '') +
       (request.destinationUrl ? '<tr><td width="100px">Destination Url</td><td>' + request.destinationUrl + '</td></tr>' : '') +
